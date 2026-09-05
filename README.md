@@ -1,27 +1,7 @@
 # Bouldwood Showroom
-This a random E-commercxe website. 
-Premium React + TypeScript showroom prototype using Vite, Tailwind CSS, Framer Motion and Lottie.
+This a random E-commercxe website for a showroom, it shows available product and integrated with a payment gateway... Simple UI but functional and productive.
+It uses premium React + TypeScript showroom prototype using Vite, Tailwind CSS, Framer Motion and Lottie for its development.
 
-Quick start
-
-1. Install dependencies
-
-```bash
-npm install
-```
-
-2. Run dev server
-
-```bash
-npm run dev
-```
-
-Build & preview
-
-```bash
-npm run build
-npm run preview
-```
 
 Notes
 
