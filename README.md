@@ -1,5 +1,5 @@
 # Bouldwood Showroom
-
+This a random E-commercxe website. 
 Premium React + TypeScript showroom prototype using Vite, Tailwind CSS, Framer Motion and Lottie.
 
 Quick start
@@ -25,6 +25,6 @@ npm run preview
 
 Notes
 
-- Images are sourced from Unsplash via query URLs for demo purposes.
+- Images are sourced from Unsplash via query URLs for demo purposes. Later on, i will work on this and make it better.
 - Lottie animations are fetched at runtime using the Fetch API and rendered via `lottie-react`.
 - This repository is a frontend prototype focused on design, responsiveness, accessibility, and animation patterns. Replace mock data with a real API for production.
