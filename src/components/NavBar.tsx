@@ -1,3 +1,4 @@
+import ArrowIcon from "./ArrowIcon";
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
@@ -87,14 +88,14 @@ export default function NavBar() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button type="submit">Search ↗</button>
+          <button type="submit">Search <ArrowIcon /></button>
         </form>
       )}
       {open && (
         <nav className="mobile-nav" aria-label="Mobile navigation">
-          <Link to="/products">The collection ↗</Link>
-          <Link to="/#story">Our philosophy ↗</Link>
-          <Link to="/#details">The details ↗</Link>
+          <Link to="/products">The collection <ArrowIcon /></Link>
+          <Link to="/#story">Our philosophy <ArrowIcon /></Link>
+          <Link to="/#details">The details <ArrowIcon /></Link>
         </nav>
       )}
     </header>

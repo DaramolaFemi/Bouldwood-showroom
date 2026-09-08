@@ -1,3 +1,4 @@
+import ArrowIcon from "../components/ArrowIcon";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import products from "../data/products";
@@ -59,7 +60,7 @@ export default function ProductPage() {
               {added ? "Added to bag ✓" : "Add to Cart"}
             </motion.button>
             <a href="/cart" className="px-6 py-3 border">
-              View bag ↗
+              View bag <ArrowIcon />
             </a>
           </div>
         </div>

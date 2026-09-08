@@ -1,3 +1,4 @@
+import ArrowIcon from "./ArrowIcon";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Product } from "../data/products";
@@ -30,7 +31,7 @@ export default function ProductCard({
             onClick={() => onQuickView(p)}
             aria-label={"Quick view " + p.name}
           >
-            ↗
+            <ArrowIcon />
           </button>
         ) : (
           <Link
@@ -38,7 +39,7 @@ export default function ProductCard({
             to={"/product/" + p.id}
             aria-label={"Discover " + p.name}
           >
-            ↗
+            <ArrowIcon />
           </Link>
         )}
       </div>

@@ -1,3 +1,4 @@
+import ArrowIcon from "./ArrowIcon";
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
@@ -12,15 +13,15 @@ export default function Footer() {
           <p>Thoughtfully chosen. Beautifully lived in.</p>
         </div>
         <nav aria-label="Footer navigation">
-          <Link to="/products">The collection ↗</Link>
-          <Link to="/#story">Our philosophy ↗</Link>
-          <Link to="/cart">Your bag ↗</Link>
+          <Link to="/products">The collection <ArrowIcon /></Link>
+          <Link to="/#story">Our philosophy <ArrowIcon /></Link>
+          <Link to="/cart">Your bag <ArrowIcon /></Link>
         </nav>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Bouldwood</span>
         <span>Objects with purpose. Spaces with soul.</span>
-        <a href="#main">Back to top ↑</a>
+        <a href="#main">Back to top <ArrowIcon direction="up" /></a>
       </div>
     </footer>
   );

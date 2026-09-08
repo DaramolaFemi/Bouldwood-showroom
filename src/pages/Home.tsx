@@ -1,3 +1,4 @@
+import ArrowIcon from "../components/ArrowIcon";
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
@@ -53,7 +54,7 @@ export default function Home() {
             </h2>
           </div>
           <Link className="text-link" to="/products">
-            Discover all pieces <span>↗</span>
+            Discover all pieces <ArrowIcon />
           </Link>
         </div>
         <Reveal className="product-grid">
@@ -87,7 +88,7 @@ export default function Home() {
             the most beautiful spaces are the ones that feel like you.
           </p>
           <Link to="/products" className="text-link">
-            Find your piece <span>↗</span>
+            Find your piece <ArrowIcon />
           </Link>
         </Reveal>
       </section>
@@ -125,7 +126,7 @@ export default function Home() {
           <em>Your kind of beautiful.</em>
         </h2>
         <Link to="/products" className="button button-light">
-          Find something to come home to <span>↗</span>
+          Find something to come home to <ArrowIcon />
         </Link>
       </section>
     </>

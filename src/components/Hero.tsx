@@ -1,3 +1,4 @@
+import ArrowIcon from "./ArrowIcon";
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
@@ -32,13 +33,13 @@ export default function Hero() {
           Furniture that feels like coming home.
         </p>
         <Link to="/products" className="button button-light">
-          Explore the collection <span>↗</span>
+          Explore the collection <ArrowIcon />
         </Link>
       </motion.div>
       <div className="hero-bottom">
         <span>Made to belong. Built to stay.</span>
         <a href="#collections">
-          SCROLL TO DISCOVER <span>↓</span>
+          SCROLL TO DISCOVER <ArrowIcon direction="down" />
         </a>
         <span>01 — THE ART OF HOME</span>
       </div>

@@ -300,9 +300,16 @@ p {
   background: #f7f5ef;
   color: #282d23;
 }
-.button span {
-  font-size: 21px;
-  line-height: 1;
+.arrow-icon {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+  vertical-align: -0.15em;
+}
+.button .arrow-icon {
+  width: 21px;
+  height: 21px;
 }
 .hero-bottom {
   position: absolute;
@@ -318,7 +325,7 @@ p {
   font-size: 9px;
   letter-spacing: 0.15em;
 }
-.hero-bottom a span {
+.hero-bottom a .arrow-icon {
   margin-left: 16px;
 }
 .intro {
