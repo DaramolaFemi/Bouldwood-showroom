@@ -1,35 +1,47 @@
-import React from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import LottieFetched from './LottieFetched'
-import ResponsiveImage from './ResponsiveImage'
-
-export default function Hero(){
-  const reduce = useReducedMotion()
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
+export default function Hero() {
+  const reduce = useReducedMotion();
   return (
-    <section className="bg-white">
-      <div className="container mx-auto px-6 py-12 grid lg:grid-cols-2 gap-8 items-center">
-        <div>
-          <motion.h1 initial={reduce? undefined: {y:8, opacity:0}} animate={reduce? undefined: {y:0,opacity:1}} transition={{delay:0.05}} className="text-4xl md:text-5xl font-display leading-tight">Furniture crafted for modern living</motion.h1>
-          <p className="mt-6 text-muted max-w-xl">Timeless materials, precise proportions, and considered details. Curated collections designed to elevate home interiors.</p>
-          <div className="mt-8 flex gap-4">
-            <a href="/products" className="px-6 py-3 bg-black text-white text-sm">Shop Collection</a>
-            <a href="#story" className="px-6 py-3 border text-sm">Our Story</a>
-          </div>
-        </div>
-        <div className="hidden lg:block">
-          <div className="rounded-xl overflow-hidden shadow-soft">
-            <ResponsiveImage
-              src="/assets/products/sora-sofa/1"
-              alt="Showroom"
-              className="w-full h-96 object-cover"
-              variants={[
-                { media: '(max-width: 768px)', src: '/assets/products/sora-sofa/1' },
-                { media: '(min-width: 769px)', src: '/assets/products/sora-sofa/1' }
-              ]}
-            />
-          </div>
-        </div>
+    <section className="hero">
+      <img
+        className="hero-image"
+        src="/assets/editorial/living-1600.webp"
+        srcSet="/assets/editorial/living-640.webp 640w, /assets/editorial/living-960.webp 960w, /assets/editorial/living-1600.webp 1600w"
+        sizes="100vw"
+        alt="Warm, sunlit living room with natural textures and considered furniture"
+        fetchPriority="high"
+      />
+      <div className="hero-shade" />
+      <motion.div
+        className="hero-content"
+        initial={reduce ? false : { opacity: 1, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <p className="eyebrow">CONSIDERED DESIGN. EVERYDAY LIVING.</p>
+        <h1>
+          A slower kind
+          <br />
+          of <em>living.</em>
+        </h1>
+        <p className="hero-description">
+          Objects with purpose. Spaces with soul.
+          <br />
+          Furniture that feels like coming home.
+        </p>
+        <Link to="/products" className="button button-light">
+          Explore the collection <span>↗</span>
+        </Link>
+      </motion.div>
+      <div className="hero-bottom">
+        <span>Made to belong. Built to stay.</span>
+        <a href="#collections">
+          SCROLL TO DISCOVER <span>↓</span>
+        </a>
+        <span>01 — THE ART OF HOME</span>
       </div>
     </section>
-  )
+  );
 }

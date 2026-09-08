@@ -1,53 +1,133 @@
-import React from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import Hero from '../components/Hero'
-import { products } from '../data/products'
-import ProductCard from '../components/ProductCard'
-import LottieFetched from '../components/LottieFetched'
-import ResponsiveImage from '../components/ResponsiveImage'
-import Testimonials from '../components/Testimonials'
-import Newsletter from '../components/Newsletter'
-
-export default function Home(){
-  const reduce = useReducedMotion()
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
+import Hero from "../components/Hero";
+import ProductCard from "../components/ProductCard";
+import products from "../data/products";
+function Reveal({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
   return (
-    <div>
+    <motion.div
+      className={className}
+      initial={reduce ? false : { opacity: 1, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.65 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+export default function Home() {
+  return (
+    <>
       <Hero />
-      <section className="container mx-auto px-6 py-12">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-display">Featured</h2>
-          <a href="/products" className="text-sm opacity-80">View all</a>
+      <section className="intro section-shell">
+        <p className="eyebrow">LESS, BUT MORE MEANINGFUL</p>
+        <Reveal>
+          <h2>
+            Good design doesn’t shout.
+            <br />
+            It makes you <em>feel something.</em>
+          </h2>
+        </Reveal>
+        <p>
+          Natural materials. Thoughtful proportions. A quiet attention to
+          detail.
+          <br className="desktop-break" /> We believe the things you live with
+          should only get better with time.
+        </p>
+      </section>
+      <section id="collections" className="section-shell collection-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">THE CONSIDERED COLLECTION</p>
+            <h2>
+              Your everyday, <em>elevated.</em>
+            </h2>
+          </div>
+          <Link className="text-link" to="/products">
+            Discover all pieces <span>↗</span>
+          </Link>
         </div>
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {products.map((p, i)=> <ProductCard key={p.id} p={p} imageIndex={i % (p.images.length || 1)} />)}
+        <Reveal className="product-grid">
+          {products.map((p, i) => (
+            <ProductCard key={p.id} p={p} imageIndex={i} />
+          ))}
+        </Reveal>
+      </section>
+      <section id="story" className="story section-shell">
+        <Reveal className="story-image">
+          <img
+            src="/assets/editorial/living-960.webp"
+            loading="lazy"
+            alt="Soft neutrals, wood and natural light in a thoughtfully furnished home"
+          />
+          <span>A LITTLE CLOSER TO NATURE.</span>
+        </Reveal>
+        <Reveal className="story-copy">
+          <p className="eyebrow">THE BOULDWOOD PHILOSOPHY</p>
+          <h2>
+            Not just a piece.
+            <br />
+            <em>A part of your life.</em>
+          </h2>
+          <p>
+            The morning coffee. The long conversations. The Sunday with nowhere
+            to be. We design for the moments that make a house your home.
+          </p>
+          <p>
+            Honest materials and enduring forms, chosen with intention. Because
+            the most beautiful spaces are the ones that feel like you.
+          </p>
+          <Link to="/products" className="text-link">
+            Find your piece <span>↗</span>
+          </Link>
+        </Reveal>
+      </section>
+      <section id="details" className="values section-shell">
+        <div>
+          <span>01 / MATERIAL</span>
+          <h3>Honest by nature.</h3>
+          <p>
+            Rich timber, tactile textiles, and finishes you’ll want to reach out
+            and touch.
+          </p>
+        </div>
+        <div>
+          <span>02 / FORM</span>
+          <h3>Room to breathe.</h3>
+          <p>
+            Considered silhouettes that bring balance to the spaces you call
+            your own.
+          </p>
+        </div>
+        <div>
+          <span>03 / EVERYDAY</span>
+          <h3>Made for living.</h3>
+          <p>
+            Comfort and character in equal measure. Pieces for all of life’s
+            little rituals.
+          </p>
         </div>
       </section>
-
-      <section className="bg-gray-50 py-12">
-        <div className="container mx-auto px-6">
-          <motion.div className="grid md:grid-cols-2 gap-8 items-center" initial={reduce? undefined : "hidden"} whileInView={reduce? undefined : "visible"} viewport={{once:true, amount:0.2}}>
-            <div>
-              <motion.h3 className="text-xl font-display" variants={{hidden:{opacity:0,y:12}, visible:{opacity:1,y:0, transition:{duration:0.6}}}}>{/* animated heading */}Craft & Materials</motion.h3>
-              <motion.p className="mt-4 text-muted" variants={{hidden:{opacity:0,y:8}, visible:{opacity:1,y:0, transition:{duration:0.6, delay:0.1}}}}>{/* animated paragraph */}Each piece is crafted with attention to proportion and longevity. We source responsibly and finish pieces by hand.</motion.p>
-            </div>
-            <motion.div className="relative" variants={{hidden:{opacity:0, scale:0.98}, visible:{opacity:1, scale:1, transition:{duration:0.8, delay:0.15}}}} aria-hidden={reduce}>
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-amber-50 via-white to-emerald-50 opacity-60 pointer-events-none" />
-              <div className="relative z-10 grid gap-4">
-                <LottieFetched url="/animations/brand-craft.json" style={{height:300}} />
-                {/* editorial image using existing product assets for reliable local delivery */}
-                <ResponsiveImage
-                  src={products[0].images[0]}
-                  alt="Artisan finishing a woven upholstery detail"
-                  className="w-full h-48 object-cover rounded-lg shadow-sm"
-                  variants={[{media: '(max-width: 768px)', src: products[0].images[0]}, {media: '(min-width: 769px)', src: products[0].images[1]}]}
-                />
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
+      <section className="closing">
+        <p className="eyebrow">MAKE ROOM FOR WHAT MATTERS</p>
+        <h2>
+          Your home.
+          <br />
+          <em>Your kind of beautiful.</em>
+        </h2>
+        <Link to="/products" className="button button-light">
+          Find something to come home to <span>↗</span>
+        </Link>
       </section>
-      <Testimonials />
-      <Newsletter />
-    </div>
-  )
+    </>
+  );
 }

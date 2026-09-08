@@ -1,15 +1,27 @@
-import React from 'react'
-
-export default function Footer(){
+import React from "react";
+import { Link } from "react-router-dom";
+import Logo from "./Logo";
+export default function Footer() {
   return (
-    <footer className="border-t mt-12 py-10 bg-white">
-      <div className="container mx-auto px-6 text-sm text-muted flex flex-col md:flex-row justify-between">
+    <footer className="site-footer section-shell">
+      <div className="footer-top">
         <div>
-          <div className="font-semibold">Bouldwood</div>
-          <div className="opacity-80 mt-2">Handcrafted furniture. Thoughtful design.</div>
+          <Link to="/" aria-label="Bouldwood home">
+            <Logo />
+          </Link>
+          <p>Thoughtfully chosen. Beautifully lived in.</p>
         </div>
-        <div className="mt-6 md:mt-0">© {new Date().getFullYear()} Bouldwood. All rights reserved.</div>
+        <nav aria-label="Footer navigation">
+          <Link to="/products">The collection ↗</Link>
+          <Link to="/#story">Our philosophy ↗</Link>
+          <Link to="/cart">Your bag ↗</Link>
+        </nav>
+      </div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} Bouldwood</span>
+        <span>Objects with purpose. Spaces with soul.</span>
+        <a href="#main">Back to top ↑</a>
       </div>
     </footer>
-  )
+  );
 }

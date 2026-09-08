@@ -1,35 +1,63 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Product } from '../data/products'
-import { motion, useReducedMotion } from 'framer-motion'
-import ResponsiveImage from './ResponsiveImage'
-
-export default function ProductCard({p, onQuickView, imageIndex=0}:{p:Product; onQuickView?: (p:Product)=>void; imageIndex?: number}){
-  const reduce = useReducedMotion()
+import React from "react";
+import { Link } from "react-router-dom";
+import { Product } from "../data/products";
+import ResponsiveImage from "./ResponsiveImage";
+export default function ProductCard({
+  p,
+  onQuickView,
+}: {
+  p: Product;
+  onQuickView?: (p: Product) => void;
+  imageIndex?: number;
+}) {
   return (
-    <motion.article whileHover={reduce? undefined: { y: -6 }} className="group bg-white">
-      <div className="relative">
-        <Link to={`/product/${p.id}`} className="block overflow-hidden rounded-md">
+    <article className="product-card">
+      <div className="product-picture">
+        <Link to={"/product/" + p.id}>
           <ResponsiveImage
-            src={p.images[imageIndex] ?? p.images[0]}
+            src={p.images[0]}
             alt={p.name}
-            className="w-full h-56 object-cover"
-            variants={[
-              { media: '(max-width: 768px)', src: p.images[0] },
-              { media: '(min-width: 769px)', src: p.images[1] ?? p.images[0] }
-            ]}
-            darkSrc={p.images[1] ?? p.images[0]}
+            className="product-photo"
+            sizes="(max-width: 640px) 100vw, 33vw"
           />
         </Link>
-        <button onClick={(e)=>{ e.stopPropagation(); onQuickView?.(p) }} aria-label="Quick view" className="absolute right-3 top-3 bg-white/90 px-3 py-1 text-sm rounded opacity-0 group-hover:opacity-100">Quick view</button>
+        <span className="product-badge">
+          {p.badges?.[0] || "A future favourite"}
+        </span>
+        {onQuickView ? (
+          <button
+            className="product-open"
+            onClick={() => onQuickView(p)}
+            aria-label={"Quick view " + p.name}
+          >
+            ↗
+          </button>
+        ) : (
+          <Link
+            className="product-open"
+            to={"/product/" + p.id}
+            aria-label={"Discover " + p.name}
+          >
+            ↗
+          </Link>
+        )}
       </div>
-      <div className="mt-3">
-        <div className="flex justify-between items-baseline">
-          <h3 className="text-sm font-medium">{p.name}</h3>
-          <div className="text-sm font-semibold">${p.price}</div>
-        </div>
-        <div className="text-xs text-muted mt-2">{p.material}</div>
+      <div className="product-meta">
+        <Link to={"/product/" + p.id}>
+          <h3>{p.name}</h3>
+        </Link>
+        <span>${p.price.toLocaleString()}</span>
       </div>
-    </motion.article>
-  )
+      <p className="product-material">{p.material}</p>
+      <div
+        className="swatches"
+        role="img"
+        aria-label={"Available finishes: " + p.colors?.join(", ")}
+      >
+        <i />
+        <i />
+        <i />
+      </div>
+    </article>
+  );
 }

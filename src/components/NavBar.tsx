@@ -1,44 +1,102 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { useCart } from '../context/CartContext'
-import { motion, useReducedMotion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-
-export default function NavBar(){
-  const { items } = useCart()
-  const [theme, setTheme] = useState<'light'|'dark'>(()=>{
-    try{ const v = localStorage.getItem('bw_theme'); return (v === 'dark')? 'dark':'light' }catch{ return 'light' }
-  })
-
-  useEffect(()=>{
-    const root = document.documentElement
-    if(theme === 'dark') root.classList.add('dark')
-    else root.classList.remove('dark')
-    try{ localStorage.setItem('bw_theme', theme) }catch{}
-  },[theme])
-  const reduce = useReducedMotion()
-
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import Logo from "./Logo";
+export default function NavBar() {
+  const { items } = useCart();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState(false);
+  const [query, setQuery] = useState("");
+  const [dark, setDark] = useState(() => {
+    try {
+      return localStorage.getItem("bw_theme") === "dark";
+    } catch {
+      return false;
+    }
+  });
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+    try {
+      localStorage.setItem("bw_theme", dark ? "dark" : "light");
+    } catch {}
+  }, [dark]);
+  useEffect(() => {
+    setOpen(false);
+    setSearch(false);
+  }, [location]);
   return (
-    <header className="border-b py-4 bg-white">
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="text-2xl font-display tracking-tight">Bouldwood</Link>
-        <nav className="hidden md:flex gap-6 items-center text-sm">
-          <NavLink to="/products" className={({isActive})=>isActive? 'font-semibold':'opacity-80'}>Shop</NavLink>
-          <a href="#collections" className="opacity-80">Collections</a>
-          <a href="#story" className="opacity-80">Craft</a>
-          <input placeholder="Search" aria-label="Search" className="ml-6 px-3 py-2 border rounded-md text-sm" />
+    <header className="site-header">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <div className="nav-inner">
+        <Link to="/" aria-label="Bouldwood home">
+          <Logo />
+        </Link>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          <NavLink to="/products">The collection</NavLink>
+          <Link to="/#story">Our philosophy</Link>
+          <Link to="/#details">The details</Link>
         </nav>
-        <div className="flex items-center gap-4">
-          <button aria-label="Toggle theme" onClick={()=> setTheme(t=> t==='dark'?'light':'dark') } className="px-2 py-1 rounded text-sm">
-            {theme === 'dark' ? '☀️' : '🌙'}
+        <div className="nav-actions">
+          <button
+            className="icon-button"
+            aria-label="Search"
+            aria-expanded={search}
+            onClick={() => setSearch(!search)}
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m16 16 5 5" />
+            </svg>
           </button>
-          <button aria-label="Wishlist" className="opacity-80">♡</button>
-          <Link to="/cart" className="flex items-center gap-2">
-            <motion.span animate={reduce? {scale:1} : { scale: items.length? 1.05:1 }} className="text-sm">Cart</motion.span>
-            <div className="bg-gray-900 text-white text-xs px-2 py-1 rounded">{items.length}</div>
+          <button
+            className="icon-button"
+            aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+            onClick={() => setDark(!dark)}
+          >
+            {dark ? "☼" : "◐"}
+          </button>
+          <Link className="bag-link" to="/cart">
+            Bag <span>{items.reduce((n, i) => n + i.qty, 0)}</span>
           </Link>
+          <button
+            className="menu-button icon-button"
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "×" : "☰"}
+          </button>
         </div>
       </div>
+      {search && (
+        <form
+          className="nav-search"
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate("/products?q=" + encodeURIComponent(query));
+          }}
+        >
+          <input
+            autoFocus
+            aria-label="Search collection"
+            placeholder="Find your next favourite piece…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button type="submit">Search ↗</button>
+        </form>
+      )}
+      {open && (
+        <nav className="mobile-nav" aria-label="Mobile navigation">
+          <Link to="/products">The collection ↗</Link>
+          <Link to="/#story">Our philosophy ↗</Link>
+          <Link to="/#details">The details ↗</Link>
+        </nav>
+      )}
     </header>
-  )
+  );
 }
