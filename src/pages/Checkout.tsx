@@ -1,7 +1,7 @@
-import ArrowIcon from "../components/ArrowIcon";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+
 export default function Checkout() {
   const { items } = useCart();
   const [review, setReview] = useState(false);
@@ -45,7 +45,7 @@ export default function Checkout() {
             </div>
           </div>
           <button onClick={() => setReview(true)} className="button bg-black">
-            Save selection on this device <ArrowIcon />
+            Save selection on this device
           </button>
           {review && (
             <p role="status" className="mt-4">
@@ -54,7 +54,7 @@ export default function Checkout() {
           )}
           <p className="mt-8">
             <Link className="text-link" to="/cart">
-              Return to your bag <ArrowIcon />
+              Return to your bag
             </Link>
           </p>
         </>
