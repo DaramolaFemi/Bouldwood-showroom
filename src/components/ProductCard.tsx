@@ -1,8 +1,8 @@
-import ArrowIcon from "./ArrowIcon";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Product } from "../data/products";
 import ResponsiveImage from "./ResponsiveImage";
+
 export default function ProductCard({
   p,
   onQuickView,
@@ -14,7 +14,7 @@ export default function ProductCard({
   return (
     <article className="product-card">
       <div className="product-picture">
-        <Link to={"/product/" + p.id}>
+        <Link to={"/product/" + p.id} aria-label={`View ${p.name}`}>
           <ResponsiveImage
             src={p.images[0]}
             alt={p.name}
@@ -25,22 +25,14 @@ export default function ProductCard({
         <span className="product-badge">
           {p.badges?.[0] || "A future favourite"}
         </span>
-        {onQuickView ? (
+        {onQuickView && (
           <button
-            className="product-open"
+            className="product-quick-view"
             onClick={() => onQuickView(p)}
             aria-label={"Quick view " + p.name}
           >
-            <ArrowIcon />
+            Quick view
           </button>
-        ) : (
-          <Link
-            className="product-open"
-            to={"/product/" + p.id}
-            aria-label={"Discover " + p.name}
-          >
-            <ArrowIcon />
-          </Link>
         )}
       </div>
       <div className="product-meta">
