@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import products from "../data/products";
+
 function Reveal({
   children,
   className = "",
@@ -25,6 +26,7 @@ function Reveal({
     </motion.div>
   );
 }
+
 export default function Home() {
   return (
     <>
@@ -54,7 +56,7 @@ export default function Home() {
             </h2>
           </div>
           <Link className="text-link" to="/products">
-            Discover all pieces <ArrowIcon />
+            Discover all pieces
           </Link>
         </div>
         <Reveal className="product-grid">
@@ -88,7 +90,7 @@ export default function Home() {
             the most beautiful spaces are the ones that feel like you.
           </p>
           <Link to="/products" className="text-link">
-            Find your piece <ArrowIcon />
+            Find your piece
           </Link>
         </Reveal>
       </section>

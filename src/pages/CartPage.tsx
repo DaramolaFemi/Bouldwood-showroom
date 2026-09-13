@@ -31,7 +31,9 @@ export default function CartPage() {
                 />
                 <div className="flex-1">
                   <div className="font-medium">{i.product.name}</div>
-                  <div className="text-sm text-muted">${i.product.price}</div>
+                  <div className="text-sm text-muted">
+                    ${i.product.price.toLocaleString()}
+                  </div>
                 </div>
                 <div className="cart-controls flex items-center gap-2">
                   <input
@@ -63,7 +65,7 @@ export default function CartPage() {
           <aside className="p-6 border rounded">
             <div className="flex justify-between">
               <div>Subtotal</div>
-              <div>${subtotal}</div>
+              <div>${subtotal.toLocaleString()}</div>
             </div>
             <div className="mt-4">
               <Link
@@ -93,7 +95,9 @@ export default function CartPage() {
                 />
                 <div className="flex-1">
                   <div className="font-medium">{s.name}</div>
-                  <div className="text-sm text-muted">${s.price}</div>
+                  <div className="text-sm text-muted">
+                    ${s.price.toLocaleString()}
+                  </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <button

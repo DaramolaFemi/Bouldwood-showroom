@@ -1,4 +1,3 @@
-import ArrowIcon from "../components/ArrowIcon";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import products from "../data/products";
@@ -26,7 +25,9 @@ export default function ProductPage() {
       </div>
       <div>
         <h1 className="text-3xl font-display">{product.name}</h1>
-        <div className="mt-4 text-xl font-semibold">${product.price}</div>
+        <div className="mt-4 text-xl font-semibold">
+          ${product.price.toLocaleString()}
+        </div>
         <p className="mt-6 text-muted">{product.description}</p>
         <div className="mt-6">
           <div className="flex items-center gap-3">
@@ -60,7 +61,7 @@ export default function ProductPage() {
               {added ? "Added to bag ✓" : "Add to Cart"}
             </motion.button>
             <a href="/cart" className="px-6 py-3 border">
-              View bag <ArrowIcon />
+              View bag
             </a>
           </div>
         </div>
