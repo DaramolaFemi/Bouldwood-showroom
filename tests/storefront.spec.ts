@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+
 test("browse, search, quick view, cart persistence and review", async ({
   page,
 }) => {
@@ -34,6 +35,7 @@ test("browse, search, quick view, cart persistence and review", async ({
   );
   expect(errors).toEqual([]);
 });
+
 test("mobile menu, filters, product quantity and no horizontal overflow", async ({
   page,
 }) => {
@@ -89,6 +91,7 @@ test("mobile menu, filters, product quantity and no horizontal overflow", async 
     ).toBe(true);
   }
 });
+
 test("accessibility in both themes, scroll sections and reduced motion", async ({
   page,
 }) => {
@@ -117,6 +120,7 @@ test("accessibility in both themes, scroll sections and reduced motion", async (
   await page.reload();
   await expect(page.locator("html")).toHaveClass("dark");
 });
+
 test("malformed local data cannot crash the cart or set a product price", async ({
   page,
 }) => {
@@ -133,5 +137,17 @@ test("malformed local data cannot crash the cart or set a product price", async 
   });
   await page.goto("/cart");
   await expect(page.getByRole("spinbutton")).toHaveValue("1");
-  await expect(page.getByText("$3299").first()).toBeVisible();
+  await expect(page.getByText("$3,299").first()).toBeVisible();
+});
+
+test("arrows are reserved for primary actions", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".product-card .arrow-icon")).toHaveCount(0);
+  await expect(page.locator(".site-footer .arrow-icon")).toHaveCount(0);
+  await expect(page.locator(".hero .button .arrow-icon")).toHaveCount(1);
+  await expect(page.locator(".closing .button .arrow-icon")).toHaveCount(1);
+
+  await page.goto("/product/harlow-dining-table");
+  await expect(page.getByText("$2,399", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "View bag" }).locator(".arrow-icon")).toHaveCount(0);
 });
