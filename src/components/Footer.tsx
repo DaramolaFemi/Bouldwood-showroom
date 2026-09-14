@@ -19,7 +19,11 @@ export default function Footer() {
         </nav>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Bouldwood</span>
+        <span>
+          © {new Date().getFullYear()} Bouldwood
+          <br />
+          Designed By Daramola Femi
+        </span>
         <span>Objects with purpose. Spaces with soul.</span>
         <a href="#main">Back to top</a>
       </div>
