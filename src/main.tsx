@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./styles/index.css";
 import "./styles/refinement.css";
+import "./styles/identity-pass.css";
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
