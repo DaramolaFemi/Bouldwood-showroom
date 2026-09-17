@@ -1,0 +1,26 @@
+/* Bouldwood identity pass
+   Refines type and the light surface without changing layout, motion,
+   photography, shopping interactions, or the established dark palette. */
+
+:root:not(.dark) {
+  --paper: #f4f6f2;
+}
+
+body {
+  font-family: "Source Sans 3", Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  letter-spacing: -0.018em;
+}
+
+.hero h1 {
+  letter-spacing: -0.02em;
+}
+
+.button-light {
+  background: #f4f6f2;
+}

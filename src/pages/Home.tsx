@@ -96,7 +96,7 @@ export default function Home() {
       </section>
       <section id="details" className="values section-shell">
         <div>
-          <span>01 / MATERIAL</span>
+          <span>MATERIAL</span>
           <h3>Honest by nature.</h3>
           <p>
             Rich timber, tactile textiles, and finishes you’ll want to reach out
@@ -104,7 +104,7 @@ export default function Home() {
           </p>
         </div>
         <div>
-          <span>02 / FORM</span>
+          <span>FORM</span>
           <h3>Room to breathe.</h3>
           <p>
             Considered silhouettes that bring balance to the spaces you call
@@ -112,7 +112,7 @@ export default function Home() {
           </p>
         </div>
         <div>
-          <span>03 / EVERYDAY</span>
+          <span>EVERYDAY</span>
           <h3>Made for living.</h3>
           <p>
             Comfort and character in equal measure. Pieces for all of life’s
