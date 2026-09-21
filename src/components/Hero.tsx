@@ -38,9 +38,7 @@ export default function Hero() {
       </motion.div>
       <div className="hero-bottom">
         <span>Made to belong. Built to stay.</span>
-        <a href="#collections">
-          SCROLL TO DISCOVER <ArrowIcon direction="down" />
-        </a>
+        <span className="hero-note">FOR ROOMS THAT ARE LIVED IN.</span>
         <span>01 — THE ART OF HOME</span>
       </div>
     </section>
