@@ -321,7 +321,8 @@ p {
   font-size: 10px;
   letter-spacing: 0.06em;
 }
-.hero-bottom a {
+.hero-bottom a,
+.hero-note {
   font-size: 9px;
   letter-spacing: 0.15em;
 }
