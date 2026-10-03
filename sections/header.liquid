@@ -1,0 +1,12 @@
+<header class="site-header">
+  <a class="brand" href="{{ routes.root_url }}">{{ shop.name | escape }}</a>
+  <nav aria-label="Primary">
+    {% for link in section.settings.menu.links %}
+      <a href="{{ link.url }}">{{ link.title | escape }}</a>
+    {% endfor %}
+  </nav>
+  <a href="{{ routes.cart_url }}">Bag <span data-cart-count>{{ cart.item_count }}</span></a>
+</header>
+{% schema %}
+{"name":"Bouldwood header","settings":[{"type":"link_list","id":"menu","label":"Menu","default":"main-menu"}]}
+{% endschema %}
