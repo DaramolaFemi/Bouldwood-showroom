@@ -1,0 +1,38 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+<section class="product-shell" data-product-root>
+  <div class="product-media">
+    {% for media in product.media %}
+      {{ media | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1280, 1600', alt: media.alt }}
+    {% endfor %}
+  </div>
+  <div class="product-copy">
+    <p class="eyebrow">{{ product.vendor | escape }}</p>
+    <h1>{{ product.title | escape }}</h1>
+    <p class="product-price">{{ current_variant.price | money }}</p>
+    <div class="rte">{{ product.description }}</div>
+    {% form 'product', product %}
+      {% unless product.has_only_default_variant %}
+        <label for="Variant-{{ section.id }}">Option</label>
+        <select id="Variant-{{ section.id }}" name="id">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title }} — {{ variant.price | money }}
+            </option>
+          {% endfor %}
+        </select>
+      {% else %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {% endunless %}
+      <label for="Quantity-{{ section.id }}">Quantity</label>
+      <input id="Quantity-{{ section.id }}" type="number" name="quantity" min="1" value="1">
+      <button type="submit" {% unless current_variant.available %}disabled{% endunless %}>
+        {% if current_variant.available %}Add to bag{% else %}Sold out{% endif %}
+      </button>
+    {% endform %}
+    {% if product.metafields.custom.material != blank %}<p><strong>Material</strong> {{ product.metafields.custom.material.value }}</p>{% endif %}
+    {% if product.metafields.custom.dimensions != blank %}<p><strong>Dimensions</strong> {{ product.metafields.custom.dimensions.value }}</p>{% endif %}
+  </div>
+</section>
+{% schema %}
+{"name":"Main product","settings":[]}
+{% endschema %}
