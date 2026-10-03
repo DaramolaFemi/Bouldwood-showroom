@@ -1,12 +1,29 @@
 <header class="site-header">
-  <a class="brand" href="{{ routes.root_url }}">{{ shop.name | escape }}</a>
-  <nav aria-label="Primary">
-    {% for link in section.settings.menu.links %}
-      <a href="{{ link.url }}">{{ link.title | escape }}</a>
-    {% endfor %}
-  </nav>
-  <a href="{{ routes.cart_url }}">Bag <span data-cart-count>{{ cart.item_count }}</span></a>
+  <div class="nav-inner">
+    <a class="brand-logo" href="{{ routes.root_url }}" aria-label="Bouldwood home">
+      <img src="{{ 'bouldwood-black.webp' | asset_url }}" alt="Bouldwood" width="243" height="76">
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="{{ routes.all_products_collection_url }}">The collection</a>
+      <a href="{{ routes.root_url }}#story">Our philosophy</a>
+      <a href="{{ routes.root_url }}#details">The details</a>
+    </nav>
+    <div class="nav-actions">
+      <form class="header-search" action="{{ routes.search_url }}" method="get" role="search">
+        <input class="header-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search pieces" aria-label="Search Bouldwood">
+        <button class="header-search__submit" type="submit">Search</button>
+      </form>
+      <a class="bag-link" href="{{ routes.cart_url }}">Bag <span data-cart-count>{{ cart.item_count }}</span></a>
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="{{ routes.all_products_collection_url }}">The collection</a>
+          <a href="{{ routes.root_url }}#story">Our philosophy</a>
+          <a href="{{ routes.root_url }}#details">The details</a>
+          <a href="{{ routes.search_url }}">Search</a>
+        </nav>
+      </details>
+    </div>
+  </div>
 </header>
-{% schema %}
-{"name":"Bouldwood header","settings":[{"type":"link_list","id":"menu","label":"Menu","default":"main-menu"}]}
-{% endschema %}
+{% schema %}{"name":"Bouldwood header","settings":[]}{% endschema %}
