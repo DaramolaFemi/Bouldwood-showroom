@@ -1,11 +1,19 @@
-<footer class="site-footer">
-  <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</p>
-  {% if section.settings.menu != blank %}
-    <nav aria-label="Footer">
-      {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}
+<footer class="site-footer bw-shell">
+  <div class="footer-top">
+    <div>
+      <a class="brand-logo" href="{{ routes.root_url }}" aria-label="Bouldwood home"><img src="{{ 'bouldwood-black.webp' | asset_url }}" alt="Bouldwood" width="243" height="76" loading="lazy"></a>
+      <p>Thoughtfully chosen. Beautifully lived in.</p>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href="{{ routes.all_products_collection_url }}">The collection</a>
+      <a href="{{ routes.root_url }}#story">Our philosophy</a>
+      <a href="{{ routes.cart_url }}">Your bag</a>
     </nav>
-  {% endif %}
+  </div>
+  <div class="footer-bottom">
+    <span>© {{ 'now' | date: '%Y' }} Bouldwood<br>Designed By Daramola Femi</span>
+    <span>Objects with purpose. Spaces with soul.</span>
+    <a href="#MainContent">Back to top</a>
+  </div>
 </footer>
-{% schema %}
-{"name":"Bouldwood footer","settings":[{"type":"link_list","id":"menu","label":"Menu"}]}
-{% endschema %}
+{% schema %}{"name":"Bouldwood footer","settings":[]}{% endschema %}
