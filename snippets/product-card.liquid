@@ -1,7 +1,18 @@
 <article class="product-card">
-  <a href="{{ product.url }}">
-    {% if product.featured_image %}{{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', alt: product.featured_image.alt }}{% endif %}
-    <h2>{{ product.title | escape }}</h2>
-    <p>{{ product.price | money }}</p>
-  </a>
+  <div class="product-picture">
+    <a href="{{ product.url }}" aria-label="View {{ product.title | escape }}">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 1000 | image_tag: class: 'product-photo', loading: 'lazy', widths: '360, 540, 720, 900, 1000', sizes: '(max-width: 767px) 88vw, 29vw', alt: product.featured_image.alt }}
+      {% endif %}
+    </a>
+    {% if product.tags.first != blank %}<span class="product-badge">{{ product.tags.first | escape }}</span>{% else %}<span class="product-badge">A future favourite</span>{% endif %}
+  </div>
+  <div class="product-meta">
+    <a href="{{ product.url }}"><h3>{{ product.title | escape }}</h3></a>
+    <span>{{ product.price | money }}</span>
+  </div>
+  {% if product.metafields.custom.material != blank %}<p class="product-material">{{ product.metafields.custom.material.value }}</p>{% elsif product.vendor != blank %}<p class="product-material">{{ product.vendor | escape }}</p>{% endif %}
+  {% if product.options_with_values.size > 0 %}
+    <div class="swatches" aria-hidden="true"><i></i><i></i><i></i></div>
+  {% endif %}
 </article>
