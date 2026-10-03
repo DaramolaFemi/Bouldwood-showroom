@@ -1,0 +1,16 @@
+<section class="collection-shell">
+  <header><p class="eyebrow">BOULDWOOD COLLECTION</p><h1>{{ collection.title | escape }}</h1>{% if collection.description != blank %}<div class="rte">{{ collection.description }}</div>{% endif %}</header>
+  {% paginate collection.products by 24 %}
+    <div class="product-grid">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        <p>No pieces are available in this collection yet.</p>
+      {% endfor %}
+    </div>
+    {{ paginate | default_pagination }}
+  {% endpaginate %}
+</section>
+{% schema %}
+{"name":"Main collection","settings":[]}
+{% endschema %}
