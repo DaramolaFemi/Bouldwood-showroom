@@ -1,0 +1,11 @@
+<footer class="site-footer">
+  <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</p>
+  {% if section.settings.menu != blank %}
+    <nav aria-label="Footer">
+      {% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}
+    </nav>
+  {% endif %}
+</footer>
+{% schema %}
+{"name":"Bouldwood footer","settings":[{"type":"link_list","id":"menu","label":"Menu"}]}
+{% endschema %}
