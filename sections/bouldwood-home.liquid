@@ -1,9 +1,12 @@
+{% assign hero_image = section.settings.hero_image %}
+{% assign story_image = section.settings.story_image | default: hero_image %}
 <section class="bw-hero">
-  <picture>
-    <source media="(max-width: 700px)" srcset="{{ 'living-640.webp' | asset_url }}">
-    <source media="(max-width: 1100px)" srcset="{{ 'living-960.webp' | asset_url }}">
-    <img class="bw-hero__image" src="{{ 'living-1600.webp' | asset_url }}" alt="Warm, sunlit living room with natural textures and considered furniture" width="1600" height="1067" fetchpriority="high">
-  </picture>
+  {% if hero_image != blank %}
+    {% assign hero_alt = hero_image.alt | default: 'Warm, sunlit living room with natural textures and considered furniture' %}
+    {{ hero_image | image_url: width: 2400 | image_tag: class: 'bw-hero__image', widths: '640, 960, 1280, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: hero_alt }}
+  {% else %}
+    <div class="bw-hero__image bw-hero__fallback" aria-hidden="true"></div>
+  {% endif %}
   <div class="bw-hero__shade"></div>
   <div class="bw-hero__content">
     <p class="eyebrow">CONSIDERED DESIGN. EVERYDAY LIVING.</p>
@@ -13,23 +16,59 @@
   </div>
   <div class="bw-hero__bottom"><span>Made to belong. Built to stay.</span><span>FOR ROOMS THAT ARE LIVED IN.</span><span>01 — THE ART OF HOME</span></div>
 </section>
+
 <section class="bw-intro bw-shell">
   <p class="eyebrow">LESS, BUT MORE MEANINGFUL</p>
   <h2>Good design doesn’t shout.<br>It makes you <em>feel something.</em></h2>
   <p>Natural materials. Thoughtful proportions. A quiet attention to detail.<br>We believe the things you live with should only get better with time.</p>
 </section>
+
 <section id="collections" class="bw-collection bw-shell">
   <div class="bw-heading"><div><p class="eyebrow">THE CONSIDERED COLLECTION</p><h2>Your everyday, <em>elevated.</em></h2></div><a class="bw-text-link" href="{{ routes.all_products_collection_url }}">Discover all pieces</a></div>
   <div class="product-grid">{% for product in collections.all.products limit: 3 %}{% render 'product-card', product: product %}{% else %}<p class="bw-empty">The collection is being prepared.</p>{% endfor %}</div>
 </section>
+
 <section id="story" class="bw-story bw-shell">
-  <div class="bw-story__image"><img src="{{ 'living-960.webp' | asset_url }}" alt="Soft neutrals, wood and natural light in a thoughtfully furnished home" width="960" height="1200" loading="lazy"><span>A LITTLE CLOSER TO NATURE.</span></div>
+  <div class="bw-story__image">
+    {% if story_image != blank %}
+      {% assign story_alt = story_image.alt | default: 'Soft neutrals, wood and natural light in a thoughtfully furnished home' %}
+      {{ story_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1280, 1600', sizes: '(max-width: 767px) 88vw, 50vw', alt: story_alt }}
+    {% else %}
+      <div class="bw-story__placeholder" aria-hidden="true"></div>
+    {% endif %}
+    <span>A LITTLE CLOSER TO NATURE.</span>
+  </div>
   <div class="bw-story__copy"><p class="eyebrow">THE BOULDWOOD PHILOSOPHY</p><h2>Not just a piece.<br><em>A part of your life.</em></h2><p>The morning coffee. The long conversations. The Sunday with nowhere to be. We design for the moments that make a house your home.</p><p>Honest materials and enduring forms, chosen with intention. Because the most beautiful spaces are the ones that feel like you.</p><a class="bw-text-link" href="{{ routes.all_products_collection_url }}">Find your piece</a></div>
 </section>
+
 <section id="details" class="bw-values bw-shell">
   <div><span>MATERIAL</span><h3>Honest by nature.</h3><p>Rich timber, tactile textiles, and finishes you’ll want to reach out and touch.</p></div>
   <div><span>FORM</span><h3>Room to breathe.</h3><p>Considered silhouettes that bring balance to the spaces you call your own.</p></div>
   <div><span>EVERYDAY</span><h3>Made for living.</h3><p>Comfort and character in equal measure. Pieces for all of life’s little rituals.</p></div>
 </section>
+
 <section class="bw-closing"><p class="eyebrow">MAKE ROOM FOR WHAT MATTERS</p><h2>Your home.<br><em>Your kind of beautiful.</em></h2><a class="bw-button bw-button--light" href="{{ routes.all_products_collection_url }}">Find something to come home to</a></section>
-{% schema %}{"name":"Bouldwood home","settings":[],"presets":[{"name":"Bouldwood home"}]}{% endschema %}
+
+{% schema %}
+{
+  "name": "Bouldwood home",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story image",
+      "info": "Leave blank to reuse the hero image."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bouldwood home"
+    }
+  ]
+}
+{% endschema %}
