@@ -1,7 +1,12 @@
 <header class="site-header">
   <div class="nav-inner">
     <a class="brand-logo" href="{{ routes.root_url }}" aria-label="Bouldwood home">
-      <img src="{{ 'bouldwood-black.webp' | asset_url }}" alt="Bouldwood" width="243" height="76">
+      {% if settings.brand_logo != blank %}
+        {% assign logo_alt = settings.brand_logo.alt | default: 'Bouldwood' %}
+        {{ settings.brand_logo | image_url: width: 500 | image_tag: class: 'brand-logo__image', widths: '180, 240, 320, 400, 500', sizes: '(max-width: 767px) 145px, 185px', loading: 'eager', alt: logo_alt }}
+      {% else %}
+        <span class="brand-logo__text">Bouldwood</span>
+      {% endif %}
     </a>
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="{{ routes.all_products_collection_url }}">The collection</a>
