@@ -1,0 +1,26 @@
+<section class="collection-shell search-shell">
+  <header class="collection-header">
+    <p class="eyebrow">SEARCH BOULDWOOD</p>
+    <h1>{% if search.performed %}Results for “{{ search.terms | escape }}”{% else %}Find your piece{% endif %}</h1>
+    <form class="search-page-form" action="{{ routes.search_url }}" method="get" role="search">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search the collection" aria-label="Search Bouldwood">
+      <input type="hidden" name="type" value="product">
+      <button type="submit">Search</button>
+    </form>
+  </header>
+  {% if search.performed %}
+    <div class="product-grid">
+      {% assign shown = 0 %}
+      {% for item in search.results %}
+        {% if item.object_type == 'product' and item.vendor == 'Bouldwood' %}
+          {% render 'product-card', product: item %}
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      {% if shown == 0 %}<p class="bw-empty">No Bouldwood pieces match that search.</p>{% endif %}
+    </div>
+  {% endif %}
+</section>
+{% schema %}
+{"name":"Main search","settings":[]}
+{% endschema %}
