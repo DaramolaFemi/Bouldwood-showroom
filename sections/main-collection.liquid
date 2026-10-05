@@ -1,15 +1,19 @@
 <section class="collection-shell">
-  <header><p class="eyebrow">BOULDWOOD COLLECTION</p><h1>{{ collection.title | escape }}</h1>{% if collection.description != blank %}<div class="rte">{{ collection.description }}</div>{% endif %}</header>
-  {% paginate collection.products by 24 %}
-    <div class="product-grid">
-      {% for product in collection.products %}
+  <header class="collection-header">
+    <p class="eyebrow">BOULDWOOD COLLECTION</p>
+    <h1>The collection</h1>
+    <p>Considered furniture for rooms that are lived in.</p>
+  </header>
+  <div class="product-grid">
+    {% assign shown = 0 %}
+    {% for product in collection.products %}
+      {% if product.vendor == 'Bouldwood' %}
         {% render 'product-card', product: product %}
-      {% else %}
-        <p>No pieces are available in this collection yet.</p>
-      {% endfor %}
-    </div>
-    {{ paginate | default_pagination }}
-  {% endpaginate %}
+        {% assign shown = shown | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+    {% if shown == 0 %}<p class="bw-empty">No Bouldwood pieces are available yet.</p>{% endif %}
+  </div>
 </section>
 {% schema %}
 {"name":"Main collection","settings":[]}
