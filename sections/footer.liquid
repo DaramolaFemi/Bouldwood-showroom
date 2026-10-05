@@ -1,7 +1,14 @@
 <footer class="site-footer bw-shell">
   <div class="footer-top">
     <div>
-      <a class="brand-logo" href="{{ routes.root_url }}" aria-label="Bouldwood home"><img src="{{ 'bouldwood-black.webp' | asset_url }}" alt="Bouldwood" width="243" height="76" loading="lazy"></a>
+      <a class="brand-logo" href="{{ routes.root_url }}" aria-label="Bouldwood home">
+        {% if settings.brand_logo != blank %}
+          {% assign logo_alt = settings.brand_logo.alt | default: 'Bouldwood' %}
+          {{ settings.brand_logo | image_url: width: 500 | image_tag: class: 'brand-logo__image', widths: '180, 240, 320, 400, 500', sizes: '(max-width: 767px) 145px, 185px', loading: 'lazy', alt: logo_alt }}
+        {% else %}
+          <span class="brand-logo__text">Bouldwood</span>
+        {% endif %}
+      </a>
       <p>Thoughtfully chosen. Beautifully lived in.</p>
     </div>
     <nav aria-label="Footer navigation">
