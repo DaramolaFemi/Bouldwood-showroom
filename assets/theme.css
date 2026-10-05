@@ -23,3 +23,19 @@
 
 .collection-header{max-width:760px;margin-bottom:46px}.collection-header h1{font-size:clamp(44px,6vw,78px);line-height:1;margin:0 0 18px}.collection-header>p:last-child{color:var(--muted);font-size:13px}.product-description{font-size:13px;line-height:1.8;color:var(--muted);margin:24px 0}.product-form{display:grid;gap:10px;margin:30px 0}.product-form label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px}.product-form select,.product-form input{min-height:48px;border:1px solid var(--line);background:transparent;padding:0 14px;color:var(--ink)}.product-form button{min-height:52px;margin-top:8px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.product-notes{border-top:1px solid var(--line);margin-top:28px;padding-top:20px}.product-notes p{font-size:11px;color:var(--muted);margin:8px 0}.product-notes strong{color:var(--ink);display:inline-block;min-width:72px}.search-page-form{display:flex;gap:10px;margin-top:28px;max-width:520px}.search-page-form input{flex:1;min-width:0;min-height:48px;border:1px solid var(--line);background:transparent;padding:0 14px}.search-page-form button{min-width:110px;border:1px solid var(--ink);background:var(--ink);color:var(--paper)}.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 @media(max-width:767px){.collection-header{margin-bottom:32px}.search-page-form{flex-direction:column}.search-page-form button{min-height:48px}.product-shell{padding-top:30px}.product-copy h1{font-size:42px;line-height:1.05}}
+
+
+/* FINAL WORDMARK FIX — removes dependence on cropped image assets */
+.brand-logo{display:none!important}
+.brand-wordmark{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);line-height:1;white-space:nowrap;flex:0 0 auto}
+.brand-monogram{font-family:Georgia,'Times New Roman',serif;font-size:30px;line-height:.9;font-weight:400;letter-spacing:-.08em}
+.brand-name{font-family:Georgia,'Times New Roman',serif;font-size:23px;line-height:1;font-weight:400;letter-spacing:-.035em}
+.brand-wordmark--footer .brand-monogram{font-size:34px}
+.brand-wordmark--footer .brand-name{font-size:27px}
+@media(max-width:767px){
+  .brand-wordmark{gap:8px}
+  .brand-monogram{font-size:25px}
+  .brand-name{font-size:19px}
+  .brand-wordmark--footer .brand-monogram{font-size:29px}
+  .brand-wordmark--footer .brand-name{font-size:23px}
+}
