@@ -25,7 +25,16 @@
 
 <section id="collections" class="bw-collection bw-shell">
   <div class="bw-heading"><div><p class="eyebrow">THE CONSIDERED COLLECTION</p><h2>Your everyday, <em>elevated.</em></h2></div><a class="bw-text-link" href="{{ routes.all_products_collection_url }}">Discover all pieces</a></div>
-  <div class="product-grid">{% for product in collections.all.products limit: 3 %}{% render 'product-card', product: product %}{% else %}<p class="bw-empty">The collection is being prepared.</p>{% endfor %}</div>
+  <div class="product-grid">
+    {% assign shown = 0 %}
+    {% for product in collections.all.products %}
+      {% if product.vendor == 'Bouldwood' and shown < 3 %}
+        {% render 'product-card', product: product %}
+        {% assign shown = shown | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+    {% if shown == 0 %}<p class="bw-empty">The collection is being prepared.</p>{% endif %}
+  </div>
 </section>
 
 <section id="story" class="bw-story bw-shell">
